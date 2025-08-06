@@ -357,7 +357,7 @@ async def promo(message: Message):
     else:
         await message.answer("❌ Неверный промокод! 😢")
 
-@dp.callback_query(lambda c: c.data == "click")
+@dp.callback_query_handler(lambda c: c.data == "click")
 async def handle_click(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     current_time = time.time()
@@ -398,7 +398,7 @@ async def handle_click(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "stats")
+@dp.callback_query_handler(lambda c: c.data == "stats")
 async def handle_stats(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     reset_daily_tasks(user)
