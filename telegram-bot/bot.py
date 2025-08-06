@@ -90,7 +90,7 @@ def load_data():
         save_data()
 
 def save_data():
-    try:
+    try:ееЕ
         os.makedirs("/data", exist_ok=True)
         with open(USER_DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(users_data, f, ensure_ascii=False, indent=4)
@@ -211,7 +211,7 @@ async def autoclicker_task(user_id):
         save_data()
         await asyncio.sleep(10)
 
-@dp.message(CommandStart())
+@dp.message_handler(commands=["start"])
 async def start(message: Message):
     args = message.text.split()
     user = get_user(message.from_user.id)
@@ -231,7 +231,7 @@ async def start(message: Message):
         reply_markup=get_main_keyboard(message.from_user.id)
     )
 
-@dp.message(Command("stats"))
+@dp.message_handler(commands=["start"])
 async def stats(message: Message):
     user = get_user(message.from_user.id)
     reset_daily_tasks(user)
