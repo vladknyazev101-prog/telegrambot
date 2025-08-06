@@ -280,12 +280,12 @@ async def leaderboard(message: Message):
     save_data()
     await message.answer(leaderboard_text)
 
-@dp.message(Command("referral"))
+@dp.message_handler(commands=["referral"])
 async def referral(message: Message):
     user_id = message.from_user.id
     await message.answer(f"🔗 <b>Твоя реферальная ссылка</b>: t.me/YourBot?start=ref_{user_id}\nПриглашай друзей и получайте по 1000 кликов! 👥")
 
-@dp.message(Command("create_clan"))
+@dp.message_handler(commands=["create_clan"])
 async def create_clan(message: Message):
     user = get_user(message.from_user.id)
     if user["clan_id"]:
@@ -304,7 +304,7 @@ async def create_clan(message: Message):
     save_data()
     await message.answer(f"✅ Клан '{clan_name}' создан! 🎉")
 
-@dp.message(Command("join_clan"))
+@dp.message_handler(commands=["join_clan"])
 async def join_clan(message: Message):
     user = get_user(message.from_user.id)
     if user["clan_id"]:
@@ -323,7 +323,7 @@ async def join_clan(message: Message):
     save_data()
     await message.answer(f"✅ Ты присоединился к клану '{clan_name}'! 🤝")
 
-@dp.message(Command("promo"))
+@dp.message_handler(commands=["promo"])
 async def promo(message: Message):
     user = get_user(message.from_user.id)
     args = message.text.split(maxsplit=1)
