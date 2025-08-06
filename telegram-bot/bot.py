@@ -11,7 +11,7 @@ from aiogram.dispatcher.filters import Command
 
 USER_DATA_FILE = "/data/users_data.json"
 CLAN_DATA_FILE = "/data/clans.json"
-TOKEN = os.getenv("8065777167:AAFQGwJHGoaXgFkt4DQq7veaMU7IPEWXwHk")
+TOKEN = os.getenv("TOKEN")
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
