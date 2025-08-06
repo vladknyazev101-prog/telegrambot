@@ -265,7 +265,7 @@ async def stats(message: Message):
     save_data()
     await message.answer(message_text, reply_markup=reply_markup)
 
-@dp.message(Command("leaderboard"))
+@dp.message_handler(commands=["leaderboard"])
 async def leaderboard(message: Message):
     if not users_data:
         await message.answer("📉 Лидерборд пуст, никто ещё не кликал! 😢")
