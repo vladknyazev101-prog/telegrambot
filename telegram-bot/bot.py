@@ -356,7 +356,7 @@ async def promo(message: Message):
         await message.answer(message_text, reply_markup=user["last_reply_markup"])
     else:
         await message.answer("❌ Неверный промокод! 😢")
-
+from aiogram.types import CallbackQuery
 @dp.callback_query_handler(lambda c: c.data == "click")
 async def handle_click(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
