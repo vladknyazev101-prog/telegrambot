@@ -436,7 +436,7 @@ async def handle_stats(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "leaderboard")
+@dp.callback_query_handler(lambda c: c.data == "leaderboard")
 async def handle_leaderboard(callback_query: CallbackQuery):
     if not users_data:
         message_text = "📉 Лидерборд пуст, никто ещё не кликал! 😢"
@@ -476,7 +476,7 @@ async def handle_leaderboard(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "upgrade")
+@dp.callback_query_handler(lambda c: c.data == "upgrade")
 async def handle_upgrade(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     upgrade_cost = get_upgrade_cost(user)
@@ -525,7 +525,7 @@ async def handle_upgrade(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "select_case")
+@dp.callback_query_handler(lambda c: c.data == "select_case")
 async def handle_select_case(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     message_text = "🎁 <b>Выбери кейс</b> 🎉:"
