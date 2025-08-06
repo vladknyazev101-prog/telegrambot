@@ -90,7 +90,7 @@ def load_data():
         save_data()
 
 def save_data():
-    try:ееЕ
+    try:
         os.makedirs("/data", exist_ok=True)
         with open(USER_DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(users_data, f, ensure_ascii=False, indent=4)
