@@ -3,6 +3,10 @@ import json
 import time
 import random
 import asyncio
+from aiogram import Bot, Dispatcher, types
+from aiogram.types import Message  # ← вот эта строка нужна
+from aiogram.utils import executor
+from aiogram.dispatcher.filters import CommandStart
 from datetime import datetime
 from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
