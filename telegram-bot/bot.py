@@ -231,7 +231,7 @@ async def start(message: Message):
         reply_markup=get_main_keyboard(message.from_user.id)
     )
 
-@dp.message_handler(commands=["start"])
+@dp.message(Command("stats"))
 async def stats(message: Message):
     user = get_user(message.from_user.id)
     reset_daily_tasks(user)
