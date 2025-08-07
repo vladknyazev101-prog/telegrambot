@@ -550,7 +550,7 @@ async def handle_select_case(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data.startswith("case_"))
+@dp.callback_query_handler(lambda c: c.data.startswith("case_"))
 async def handle_case(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     case_type = callback_query.data.split("_")[1]
@@ -610,7 +610,7 @@ async def handle_case(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "daily_reward")
+@dp.callback_query_handler(lambda c: c.data == "daily_reward")
 async def handle_daily_reward(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     current_time = time.time()
@@ -658,7 +658,7 @@ async def handle_daily_reward(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "shop")
+@dp.callback_query_handler(lambda c: c.data == "shop")
 async def handle_shop(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     message_text = "🏬 <b>Магазин</b> 🛒:"
@@ -682,7 +682,7 @@ async def handle_shop(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "buy_autoclicker")
+@dp.callback_query_handler(lambda c: c.data == "buy_autoclicker")
 async def buy_autoclicker(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     if user["autoclicker"]:
@@ -739,7 +739,7 @@ async def buy_autoclicker(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "buy_case_bonus")
+@dp.callback_query_handler(lambda c: c.data == "buy_case_bonus")
 async def buy_case_bonus(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     if user["case_bonus"] >= 0.05:
@@ -795,7 +795,7 @@ async def buy_case_bonus(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "achievements")
+@dp.callback_query_handler(lambda c: c.data == "achievements")
 async def handle_achievements(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     achievement_text = (
@@ -819,7 +819,7 @@ async def handle_achievements(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "promo")
+@dp.callback_query_handler(lambda c: c.data == "promo")
 async def handle_promo(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     message_text = "🔑 Введи промокод командой: /promo 241122\n(Доступно раз в 24 часа, даёт 5000 кликов) 🎟️"
@@ -838,7 +838,7 @@ async def handle_promo(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "clan")
+@dp.callback_query_handler(lambda c: c.data == "clan")
 async def handle_clan(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     if user["clan_id"]:
@@ -861,7 +861,7 @@ async def handle_clan(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "activity")
+@dp.callback_query_handler(lambda c: c.data == "activity")
 async def handle_activity(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     if not users_data:
@@ -900,7 +900,7 @@ async def handle_activity(callback_query: CallbackQuery):
             await callback_query.message.answer(f"❌ Произошла ошибка: {str(e)} 😢")
             await callback_query.answer()
 
-@dp.callback_query(lambda c: c.data == "back")
+@dp.callback_query_handler(lambda c: c.data == "back")
 async def handle_back(callback_query: CallbackQuery):
     user = get_user(callback_query.from_user.id)
     message_text = "👋 Вернулся в главное меню! 🎮"
