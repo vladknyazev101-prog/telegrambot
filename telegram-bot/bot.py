@@ -936,7 +936,7 @@ async def reset_daily_clicks():
 
 def main():
     load_data()
-    dp.loop.create_task(set_bot_commands())
+    await set_bot_commands()
     for user_id in users_data:
         if users_data[user_id].get("autoclicker", False):
             dp.loop.create_task(autoclicker_task(user_id))
