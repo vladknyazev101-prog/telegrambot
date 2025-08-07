@@ -1,0 +1,42 @@
+{
+    "1554317755": {
+        "clicks": 1038.0,
+        "coins": 15,
+        "username": "spiraledits",
+        "click_multiplier": 2,
+        "upgrade_level": 1,
+        "last_daily_reward": 1754593542.494056,
+        "autoclicker": false,
+        "autoclicker_level": 0,
+        "case_bonus": 0,
+        "achievements": {
+            "clicker_novice": 500,
+            "case_master": 0,
+            "rich": 0,
+            "clan_hero": 0,
+            "lottery_magnate": 0,
+            "referral_leader": 0
+        },
+        "referrals": 0,
+        "daily_tasks": {
+            "clicks": 15,
+            "cases": 0,
+            "upgrade": 1,
+            "referral": 0,
+            "clan_clicks": 0,
+            "last_reset": 1754593519.3158574
+        },
+        "daily_clicks": 42.0,
+        "clan_id": null,
+        "last_promo": 0,
+        "last_click_time": 1754594065.491446,
+        "last_lottery": 1754593546.4299376,
+        "tag": null,
+        "click_booster": 0,
+        "clan_clicks_contributed": 0,
+        "cases_opened": 0,
+        "lottery_wins": 0,
+        "last_message_text": "🖱️ Клик! Всего кликов: 1038.0 💎, монет: 15 🪙",
+        "last_reply_markup": null
+    }
+}
