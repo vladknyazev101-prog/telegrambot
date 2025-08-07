@@ -98,9 +98,9 @@ def load_data():
         clans = {}
         save_data()
 
-    if os.path.exists(CLAN_DATA_FILE):
-        try:
-            with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
+   if os.path.exists(CLAN_DATA_FILE):
+    try:
+        with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
             clans = json.load(f)
             for clan_id in clans:
                 clans[clan_id].setdefault("clan_clicks", 0)
@@ -112,6 +112,7 @@ def load_data():
     except Exception as e:
         print(f"Ошибка при загрузке данных кланов: {str(e)}")
         clans = {}
+        save_data()
 else:
     print(f"Файл {CLAN_DATA_FILE} не найден, начинаем с пустыми данными.")
     clans = {}
