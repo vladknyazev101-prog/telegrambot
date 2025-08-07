@@ -73,7 +73,7 @@ def load_data():
         save_data()
 
     # 🔥 ВНИМАНИЕ: Вот тут была ошибка отступа!
-    if os.path.exists(CLAN_DATA_FILE):
+if os.path.exists(CLAN_DATA_FILE):
         try:
             with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
                 clans = json.load(f)
