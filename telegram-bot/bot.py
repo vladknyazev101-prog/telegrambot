@@ -3,6 +3,12 @@ import json
 import time
 import random
 import asyncio
+# Создаём папку, если её нет
+os.makedirs("UsersData", exist_ok=True)
+
+USERS_DATA_FILE = "UsersData/users_data.json"
+CLANS_DATA_FILE = "UsersData/clans.json"
+
 from aiogram import Bot, Dispatcher, types
 from aiogram.types import Message  # ← вот эта строка нужна
 from aiogram.utils import executor
