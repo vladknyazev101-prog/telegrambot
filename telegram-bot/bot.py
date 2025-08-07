@@ -8,13 +8,20 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import BotCommand, BotCommandScopeDefault
 from aiogram.dispatcher.filters import Command
-TOKEN = "8065777167:AAFQGwJHGoaXgFkt4DQq7veaMU7IPEWXwHk"
+
+# Получаем токен: из переменной окружения или напрямую
+TOKEN = os.getenv("BOT_TOKEN") or "8065777167:AAFQGwJHGoaXgFkt4DQq7veaMU7IPEWXwHk"
+if not TOKEN:
+    raise ValueError("BOT_TOKEN is not set!")
+
 # Пути для Render (используем корень проекта или диск)
 USER_DATA_FILE = os.path.join(os.getenv("RENDER_DISK_PATH", "."), "users_data.json")
 CLAN_DATA_FILE = os.path.join(os.getenv("RENDER_DISK_PATH", "."), "clans.json")
-TOKEN = os.getenv("BOT_TOKEN")
+
+# Создаём бота и диспетчер
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
+
 
 users_data = {}
 clans = {}
