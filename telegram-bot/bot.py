@@ -8,7 +8,7 @@ from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import BotCommand, BotCommandScopeDefault
 from aiogram.dispatcher.filters import Command
-
+TOKEN = "8065777167:AAFQGwJHGoaXgFkt4DQq7veaMU7IPEWXwHk"
 # Пути для Render (используем корень проекта или диск)
 USER_DATA_FILE = os.path.join(os.getenv("RENDER_DISK_PATH", "."), "users_data.json")
 CLAN_DATA_FILE = os.path.join(os.getenv("RENDER_DISK_PATH", "."), "clans.json")
