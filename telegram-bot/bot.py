@@ -99,8 +99,8 @@ def load_data():
         save_data()
 
     if os.path.exists(CLAN_DATA_FILE):
-    try:
-        with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
+        try:
+            with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
             clans = json.load(f)
             for clan_id in clans:
                 clans[clan_id].setdefault("clan_clicks", 0)
