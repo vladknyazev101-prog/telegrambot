@@ -979,6 +979,6 @@ def main():
             dp.loop.create_task(clan_autoclicker_task(clan_id))
     dp.loop.create_task(reset_daily_clicks())
 
-if name == "__main__":
+if __name__ == "__main__":
     main()
     executor.start_polling(dp, skip_updates=True, timeout=30)
