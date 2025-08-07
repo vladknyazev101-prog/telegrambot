@@ -4,17 +4,21 @@ import time
 import random
 import asyncio
 from aiogram import Bot, Dispatcher, types
-from aiogram.types import Message  # ← вот эта строка нужна
+from aiogram.types import Message
 from aiogram.utils import executor
 from aiogram.dispatcher.filters import CommandStart
 from datetime import datetime
-from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import BotCommand, BotCommandScopeDefault
 from aiogram.dispatcher.filters import Command
 
-USER_DATA_FILE = "/data/users_data.json"
-CLAN_DATA_FILE = "/data/clans.json"
+# ✅ Создаём папку для хранения данных
+os.makedirs("UsersData", exist_ok=True)
+
+# ✅ Используем относительные пути
+USER_DATA_FILE = "UsersData/users_data.json"
+CLAN_DATA_FILE = "UsersData/clans.json"
+
 TOKEN = os.getenv("TOKEN")
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
