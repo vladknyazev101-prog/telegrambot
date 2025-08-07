@@ -22,11 +22,18 @@ CLAN_DATA_FILE = os.path.join(os.getenv("RENDER_DISK_PATH", "."), "clans.json")
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
-
 users_data = {}
 clans = {}
 SEASON_END = datetime(2025, 8, 15).timestamp()
 
+# Сохраняем данные пользователей и кланов
+def save_data():
+    with open(USER_DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(users_data, f, indent=4, ensure_ascii=False)
+    with open(CLAN_DATA_FILE, "w", encoding="utf-8") as f:
+        json.dump(clans, f, indent=4, ensure_ascii=False)
+
+# Загружаем данные
 def load_data():
     global users_data, clans
 
@@ -100,30 +107,15 @@ def load_data():
         except Exception as e:
             print(f"Ошибка при загрузке данных кланов: {str(e)}")
             clans = {}
+            save_data()
     else:
         print(f"Файл {CLAN_DATA_FILE} не найден, начинаем с пустыми данными.")
         clans = {}
         save_data()
 
-if os.path.exists(CLAN_DATA_FILE):
-    try:
-        with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
-            clans = json.load(f)
-            for clan_id in clans:
-                clans[clan_id].setdefault("clan_clicks", 0)
-                clans[clan_id].setdefault("clan_tag", None)
-                clans[clan_id].setdefault("clan_booster", 0)
-                clans[clan_id].setdefault("clan_autoclicker", 0)
-        print(f"Данные кланов загружены из {CLAN_DATA_FILE}. Кланов: {len(clans)}")
-        save_data()
-    except Exception as e:
-        print(f"Ошибка при загрузке данных кланов: {str(e)}")
-        clans = {}
-        save_data()
-else:
-    print(f"Файл {CLAN_DATA_FILE} не найден, начинаем с пустыми данными.")
-    clans = {}
-    save_data()
+# Загружаем при запуске
+load_data()
+
 
 def save_data():
     try:
