@@ -22,7 +22,7 @@ SEASON_END = datetime(2025, 8, 15).timestamp()
 
 def load_data():
     global users_data, clans
-   if os.path.exists(USER_DATA_FILE):
+    if os.path.exists(USER_DATA_FILE):
         try:
             with open(USER_DATA_FILE, "r", encoding="utf-8") as f:
                 loaded_data = json.load(f)
@@ -73,7 +73,7 @@ def load_data():
         save_data()
 
     # 🔥 ВНИМАНИЕ: Вот тут была ошибка отступа!
-   if os.path.exists(CLAN_DATA_FILE):
+    if os.path.exists(CLAN_DATA_FILE):
         try:
             with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
                 clans = json.load(f)
@@ -93,7 +93,7 @@ def load_data():
         clans = {}
         save_data()
 
-   if os.path.exists(CLAN_DATA_FILE):
+    if os.path.exists(CLAN_DATA_FILE):
     try:
         with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
             clans = json.load(f)
