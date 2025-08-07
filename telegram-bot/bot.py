@@ -3,23 +3,16 @@ import json
 import time
 import random
 import asyncio
-from aiogram import Bot, Dispatcher, types
-from aiogram.types import Message
-from aiogram.utils import executor
-from aiogram.dispatcher.filters import CommandStart
 from datetime import datetime
+from aiogram import Bot, Dispatcher, executor, types
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from aiogram.types import BotCommand, BotCommandScopeDefault
 from aiogram.dispatcher.filters import Command
 
-# ✅ Создаём папку для хранения данных
-os.makedirs("UsersData", exist_ok=True)
-
-# ✅ Используем относительные пути
-USER_DATA_FILE = "UsersData/users_data.json"
-CLAN_DATA_FILE = "UsersData/clans.json"
-
-TOKEN = os.getenv("TOKEN")
+# Пути для Render (используем корень проекта или диск)
+USER_DATA_FILE = os.path.join(os.getenv("RENDER_DISK_PATH", "."), "users_data.json")
+CLAN_DATA_FILE = os.path.join(os.getenv("RENDER_DISK_PATH", "."), "clans.json")
+TOKEN = os.getenv("BOT_TOKEN")
 bot = Bot(token=TOKEN)
 dp = Dispatcher(bot)
 
@@ -70,13 +63,13 @@ def load_data():
                     data.setdefault("lottery_wins", 0)
                 print(f"Данные пользователей загружены из {USER_DATA_FILE}. Пользователей: {len(users_data)}")
                 save_data()
-        except Exception as e:
-            print(f"Ошибка при загрузке данных пользователей: {str(e)}")
+            except Exception as e:
+                print(f"Ошибка при загрузке данных пользователей: {str(e)}")
+                users_data = {}
+        else:
+            print(f"Файл {USER_DATA_FILE} не найден, начинаем с пустыми данными.")
             users_data = {}
-    else:
-        print(f"Файл {USER_DATA_FILE} не найден, начинаем с пустыми данными.")
-        users_data = {}
-        save_data()
+            save_data()
 
     if os.path.exists(CLAN_DATA_FILE):
         try:
@@ -89,17 +82,18 @@ def load_data():
                     clans[clan_id].setdefault("clan_autoclicker", 0)
                 print(f"Данные кланов загружены из {CLAN_DATA_FILE}. Кланов: {len(clans)}")
                 save_data()
-        except Exception as e:
-            print(f"Ошибка при загрузке данных кланов: {str(e)}")
+            except Exception as e:
+                print(f"Ошибка при загрузке данных кланов: {str(e)}")
+                clans = {}
+        else:
+            print(f"Файл {CLAN_DATA_FILE} не найден, начинаем с пустыми данными.")
             clans = {}
-    else:
-        print(f"Файл {CLAN_DATA_FILE} не найден, начинаем с пустыми данными.")
-        clans = {}
-        save_data()
+            save_data()
 
 def save_data():
     try:
-        os.makedirs("/data", exist_ok=True)
+        # Создаём директорию, если она не существует
+        os.makedirs(os.path.dirname(USER_DATA_FILE), exist_ok=True)
         with open(USER_DATA_FILE, "w", encoding="utf-8") as f:
             json.dump(users_data, f, ensure_ascii=False, indent=4)
         with open(CLAN_DATA_FILE, "w", encoding="utf-8") as f:
@@ -938,22 +932,25 @@ async def reset_daily_clicks():
         save_data()
         await asyncio.sleep(86400)
 from aiogram import executor
+async def set_bot_commands():
+    commands = [
+        BotCommand(command="/start", description="Запустить бота"),
+        BotCommand(command="/stats", description="Посмотреть статистику"),
+        BotCommand(command="/click", description="Кликнуть для получения монет")
+    ]
+    await bot.set_my_commands(commands, scope=BotCommandScopeDefault())
 
 def main():
     load_data()
-
+    dp.loop.create_task(set_bot_commands())
     for user_id in users_data:
         if users_data[user_id].get("autoclicker", False):
             dp.loop.create_task(autoclicker_task(user_id))
-
     for clan_id in clans:
         if clans[clan_id].get("clan_autoclicker", 0) > 0:
             dp.loop.create_task(clan_autoclicker_task(clan_id))
-
     dp.loop.create_task(reset_daily_clicks())
 
-    # Запуск бота
-    executor.start_polling(dp, skip_updates=True, timeout=30)
-
-if __name__ == "__main__":
+if name == "__main__":
     main()
+    executor.start_polling(dp, skip_updates=True, timeout=30)
