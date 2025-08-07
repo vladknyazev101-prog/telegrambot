@@ -22,6 +22,8 @@ SEASON_END = datetime(2025, 8, 15).timestamp()
 
 def load_data():
     global users_data, clans
+
+    # Загрузка данных пользователей
     if os.path.exists(USER_DATA_FILE):
         try:
             with open(USER_DATA_FILE, "r", encoding="utf-8") as f:
@@ -61,8 +63,10 @@ def load_data():
                     data.setdefault("clan_clicks_contributed", 0)
                     data.setdefault("cases_opened", 0)
                     data.setdefault("lottery_wins", 0)
+
             print(f"Данные пользователей загружены из {USER_DATA_FILE}. Пользователей: {len(users_data)}")
             save_data()
+
         except Exception as e:
             print(f"Ошибка при загрузке данных пользователей: {str(e)}")
             users_data = {}
@@ -72,7 +76,7 @@ def load_data():
         users_data = {}
         save_data()
 
-    # 🔥 ВНИМАНИЕ: Вот тут была ошибка отступа!
+    # Загрузка данных кланов
     if os.path.exists(CLAN_DATA_FILE):
         try:
             with open(CLAN_DATA_FILE, "r", encoding="utf-8") as f:
@@ -82,12 +86,13 @@ def load_data():
                     clans[clan_id].setdefault("clan_tag", None)
                     clans[clan_id].setdefault("clan_booster", 0)
                     clans[clan_id].setdefault("clan_autoclicker", 0)
+
             print(f"Данные кланов загружены из {CLAN_DATA_FILE}. Кланов: {len(clans)}")
             save_data()
+
         except Exception as e:
             print(f"Ошибка при загрузке данных кланов: {str(e)}")
             clans = {}
-            save_data()
     else:
         print(f"Файл {CLAN_DATA_FILE} не найден, начинаем с пустыми данными.")
         clans = {}
