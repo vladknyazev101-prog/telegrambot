@@ -61,15 +61,16 @@ def load_data():
                     data.setdefault("clan_clicks_contributed", 0)
                     data.setdefault("cases_opened", 0)
                     data.setdefault("lottery_wins", 0)
-                print(f"Данные пользователей загружены из {USER_DATA_FILE}. Пользователей: {len(users_data)}")
-                save_data()
-            except Exception as e:
-                print(f"Ошибка при загрузке данных пользователей: {str(e)}")
-                users_data = {}
-        else:
-            print(f"Файл {USER_DATA_FILE} не найден, начинаем с пустыми данными.")
+            print(f"Данные пользователей загружены из {USER_DATA_FILE}. Пользователей: {len(users_data)}")
+            save_data()
+        except Exception as e:
+            print(f"Ошибка при загрузке данных пользователей: {str(e)}")
             users_data = {}
             save_data()
+    else:
+        print(f"Файл {USER_DATA_FILE} не найден, начинаем с пустыми данными.")
+        users_data = {}
+        save_data()
 
     if os.path.exists(CLAN_DATA_FILE):
         try:
