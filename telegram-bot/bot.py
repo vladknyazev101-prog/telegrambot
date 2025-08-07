@@ -933,18 +933,23 @@ async def reset_daily_clicks():
                 users_data[user_id]["clicks"] += 1000
         save_data()
         await asyncio.sleep(86400)
+from aiogram import executor
 
 def main():
     load_data()
-    await set_bot_commands()
+
     for user_id in users_data:
         if users_data[user_id].get("autoclicker", False):
             dp.loop.create_task(autoclicker_task(user_id))
+
     for clan_id in clans:
         if clans[clan_id].get("clan_autoclicker", 0) > 0:
             dp.loop.create_task(clan_autoclicker_task(clan_id))
+
     dp.loop.create_task(reset_daily_clicks())
+
+    # Запуск бота
+    executor.start_polling(dp, skip_updates=True, timeout=30)
 
 if __name__ == "__main__":
     main()
-    executor.start_polling(dp, skip_updates=True, timeout=30)
